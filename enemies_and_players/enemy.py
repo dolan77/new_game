@@ -8,7 +8,7 @@ class Enemy:
     def __init__(self, n, lvl, st):
         self.name = n
         self.level = lvl
-        self.stat = st
+        self.stats = st
 
 
 # function that prints the enemy HUD
@@ -27,6 +27,7 @@ def enemy_spawn():
 enemy_numbers = [5, 5, 5, 4, 3, 4, 5, 1, 2]
 
 # will pull a random number in the enemy_numbers list for the enemy's health, attack, defense, speed
+# ELEMENT 0 == HP | ELEMENT 1 == ATK | ELEMENT 2 == DEF | ELEMENT 3 == SPD
 enemy_stats = [random.choice(enemy_numbers), random.choice(enemy_numbers), random.choice(enemy_numbers),
                random.choice(enemy_numbers)]
 
