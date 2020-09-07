@@ -1,5 +1,10 @@
 import random
 
+# initializing how many potions the player will have, each one will give a different amount of healing
+small_potion = 0
+medium_potion = 0
+EX_potion = 0
+
 
 class Player:
     def __init__(self, n, t, lvl, hp, atk, spd, d, exp):

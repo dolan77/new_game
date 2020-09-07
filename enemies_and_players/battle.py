@@ -9,6 +9,53 @@ enemy = e.enemy
 next_lvl = 25
 
 
+def fight():
+    # calculates the player's damage against the enemy, if the player deals less than or equal to 0 damage
+    # sets the damage to 1
+    damage_dealt = e.enemy.stats[2] - player.attack
+    if damage_dealt <= 0:
+        damage_dealt = 1
+
+    # calculates the enemy's damage against the player, if the enemy deals less than or equal to 0 damage
+    # sets the damage to 1
+    damage_received = player.defense - e.enemy.stats[2]
+    if damage_received <= 0:
+        damage_received = 1
+
+    # prints the damage received and dealt
+    print("\nYou dealt {} damage to the enemy!".format(damage_dealt))
+    print("The enemy dealt {} damage to you!\n".format(damage_received))
+
+    # changes the enemy's and player's health after the damage is dealt / received
+    e.enemy.stats[0] -= damage_dealt
+    p.player.health -= damage_received
+
+
+# a function where the player can use their items, items for now will only include health potions that offer
+# different amounts of healing
+def items():
+    # variable for checking if the player has no potion of that type
+    no_potion = 0
+    # boolean variable that will be True if the player is in the item menu and false when they leave it
+    in_menu = True
+
+    # attempt at a linked list, lists the potion options and amount they have
+    potion_options = ["Small Potion", "Medium Potion", "EX Potion"]
+    potion_amount = [p.small_potion, p.medium_potion, p.EX_potion]
+
+    # will loop through the potion_amount list to check if the player has a potion
+    # if so, print the potion name and amount they have
+    # otherwise, print something that tells the player they don't have any potions
+    # FIXME: want the index of the potion that holds the item amount of potions the user has but it instead returns
+    #  the amount of potions, ruining the system
+    for i in range(len(potion_amount)):
+        if i > 0:
+            print("{}: {}".format(potion_options[i], potion_amount[i]))
+
+        else:
+            no_potion += 0
+
+
 # try to find a way to use a switch case in Python
 def battle_sys():
     while e.enemy.stats[0] > 0:
@@ -26,31 +73,12 @@ def battle_sys():
                        "> RUN\n")
 
         while choice.upper() not in options:
-            choice = input("Please enter a valid choice\n> Fight\n> Run\n")
+            choice = input("Please enter a valid choice\n> FIGHT\n> RUN\n")
 
-        # print(options.get(choice.upper()))
-
-        # screw it, ill give into using if/else
+        # screw it, I'll use if/else statements for now
         if choice.upper() == "FIGHT":
-            # calculates the player's damage against the enemy, if the player deals less than or equal to 0 damage
-            # sets the damage to 1
-            damage_dealt = e.enemy.stats[2] - player.attack
-            if damage_dealt <= 0:
-                damage_dealt = 1
-
-            # calculates the enemy's damage against the player, if the enemy deals less than or equal to 0 damage
-            # sets the damage to 1
-            damage_received = player.defense - e.enemy.stats[2]
-            if damage_received <= 0:
-                damage_received = 1
-
-            # prints the damage received and dealt
-            print("\nYou dealt {} damage to the enemy!".format(damage_dealt))
-            print("The enemy dealt {} damage to you!\n".format(damage_received))
-
-            # changes the enemy's and player's health after the damage is dealt / received
-            e.enemy.stats[0] -= damage_dealt
-            p.player.health -= damage_received
+            fight()
+        # print(options.get(choice.upper()))
 
 
 def experience():
@@ -75,6 +103,8 @@ def experience():
         p.player.speed += 3
 
         print("You leveled up! ALL stats are increased!")
+        print("HP: {} ATK: {} DEF: {} SPD: {}\n".format(p.player.health, p.player.attack, p.player.defense,
+                                                        p.player.speed))
 
     # if the player doesn't level up after a battle will print the experience gained in the battle
     print('You gained {} experience!\n'.format(p.player.experience))
@@ -86,3 +116,8 @@ def experience():
                                                                next_lvl - p.player.experience))
 
 
+p.EX_potion = 4
+p.medium_potion = 4
+p.small_potion = 4
+
+items()

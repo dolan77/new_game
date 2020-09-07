@@ -24,7 +24,7 @@ def enemy_spawn():
 
 
 # enemy_numbers is a list of numbers that the enemy will use for their health, attack, defense and speed stat.
-enemy_numbers = [5, 5, 5, 4, 3, 4, 5, 1, 2]
+enemy_numbers = [5, 3, 4, 4, 3, 4, 5, 1, 2]
 
 # will pull a random number in the enemy_numbers list for the enemy's health, attack, defense, speed
 # ELEMENT 0 == HP | ELEMENT 1 == ATK | ELEMENT 2 == DEF | ELEMENT 3 == SPD
