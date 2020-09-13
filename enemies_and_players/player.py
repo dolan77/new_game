@@ -17,7 +17,7 @@ class Player:
         self.defense = d
         self.experience = exp
 
-    def leveling(self):
+    def level_up(self):
         self.level = self.level + 1
 
         # rolls for adding random stats to health, attack, speed and defense respectively when the player levels up
@@ -29,6 +29,15 @@ class Player:
 
 def player_hud():
     print("{}\nLVL: {}\nHP: {}".format(player.name.upper(), player.level, player.health))
+
+
+# FIXME: find a way to make sure the player cannot heal more than what their max health allows.
+#  EXAMPLE: if the player's max health is 15 and the player uses a small potion when he has 14 HP, heal only 1 HP
+
+
+def max_health():
+    max_hp = player.health
+    pass
 
 
 # from element 0 through 3: health, attack, speed, defense
