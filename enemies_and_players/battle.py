@@ -89,7 +89,7 @@ def experience():
                                                                int((p.player.experience / next_lvl) * 100),
                                                                next_lvl - p.player.experience))
 
-    print("HP: {} ATK: {} DEF: {} SPD: {}\n".format(p.player.health, p.player.attack, p.player.defense,
+    print("HP: {} ATK: {} DEF: {} SPD: {}\n".format(p.player.max_health, p.player.attack, p.player.defense,
                                                     p.player.speed))
 
 

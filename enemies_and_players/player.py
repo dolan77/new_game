@@ -7,7 +7,7 @@ EX_potion = 0
 
 
 class Player:
-    def __init__(self, n, t, lvl, hp, atk, spd, d, exp):
+    def __init__(self, n, t, lvl, hp, atk, spd, d, exp, max_hp):
         self.name = n
         self.title = t
         self.level = lvl
@@ -16,36 +16,33 @@ class Player:
         self.speed = spd
         self.defense = d
         self.experience = exp
+        self.max_health = max_hp
 
     def level_up(self):
         self.level = self.level + 1
 
         # rolls for adding random stats to health, attack, speed and defense respectively when the player levels up
-        self.health = self.health + random.randint(2, 5)
-        self.attack = self.attack + random.randint(1, 3)
-        self.speed = self.speed + random.randint(1, 3)
-        self.defense = self.defense + random.randint(1, 3)
+        self.max_health += random.randint(2, 5)
+        self.attack += random.randint(1, 3)
+        self.speed += random.randint(1, 3)
+        self.defense += random.randint(1, 3)
 
 
 def player_hud():
     print("{}\nLVL: {}\nHP: {}".format(player.name.upper(), player.level, player.health))
 
 
-# FIXME: find a way to make sure the player cannot heal more than what their max health allows.
-#  EXAMPLE: if the player's max health is 15 and the player uses a small potion when he has 14 HP, heal only 1 HP
-
-
-def max_health():
-    max_hp = player.health
-    pass
+def max_health(new_health):
+    if new_health >= player.max_health:
+        player.health = player.max_health
 
 
 # from element 0 through 3: health, attack, speed, defense
 initial_stat = [10, 5, 5, 5]
 
 # creates a player from the player class with certain attributes starting from left moving to right:
-# player name, player title, health, attack, speed, defense, experience
-player = Player("Cheese", "Hero", 1, initial_stat[0], initial_stat[1], initial_stat[2], initial_stat[3], 0)
+# player name, player title, health, attack, speed, defense, experience, max_hp
+player = Player("Cheese", "Hero", 1, initial_stat[0], initial_stat[1], initial_stat[2], initial_stat[3], 0, 20)
 
 # print("HEALTH: {}\nATK: {}\nDEF: {}\nSPD: {}".format(player.health, player.attack, player.defense, player.speed))
 
